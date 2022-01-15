@@ -15,7 +15,7 @@ public class AddressBookMain {
 		contact.setZip("413306");
 		contact.setPhoneNumber("8600198664");
 		contact.setEmail("digheakshay21@gmail.com");
-		
+
 		ContactStore contactStore = new ContactStore();
 		contactStore.add(contact);
 
@@ -23,7 +23,8 @@ public class AddressBookMain {
 		Scanner scanner = new Scanner(System.in);
 		boolean check = true;
 		while (check) {
-			System.out.println("Enter choice 1.Add the new contact\n 2.Edit Existing contact\n 3.exit");
+			System.out.println(
+					"Enter choice 1.Add the new contact\n 2.Edit Existing contact\n 3.Remove the Contact\n 4.exit");
 			int choice = scanner.nextInt();
 			scanner.nextLine();
 			switch (choice) {
@@ -39,7 +40,12 @@ public class AddressBookMain {
 				System.out.println("Contact List after edit");
 				userInterface.print(contactStore.getContactList());
 			}
-			case 3 -> check = false;
+			case 3 -> {
+				contactStore.remove();
+				System.out.println("Contact List after deletion");
+				userInterface.print(contactStore.getContactList());
+			}
+			case 4 -> check = false;
 			}
 		}
 	}
