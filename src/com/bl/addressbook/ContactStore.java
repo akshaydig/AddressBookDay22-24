@@ -1,8 +1,9 @@
 package com.bl.addressbook;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ContactStore extends AddressBook {
 	Scanner scanner = new Scanner(System.in);
@@ -156,6 +157,29 @@ public class ContactStore extends AddressBook {
 			List<ContactStore> list = dictionary.get(i).stream().sorted(Comparator.comparing(AddressBook::getState))
 					.collect(Collectors.toList());
 			System.out.println(list);
+		}
+	}
+
+	public static void writeToFile(Hashtable<Integer, ArrayList<ContactStore>> addressBook) {
+		try {
+			FileWriter fileWriter = new FileWriter("AddressBook.txt");
+			String stream = String.valueOf(addressBook);
+			fileWriter.write(stream);
+			fileWriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void readFromFile() {
+		try {
+			FileReader fileReader = new FileReader("AddressBook.txt");
+			int i;
+			while ((i = fileReader.read()) != -1) {
+				System.out.print((char) i);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
